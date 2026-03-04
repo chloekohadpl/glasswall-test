@@ -151,6 +151,15 @@ class Glasswall {
         .asFunction();
   }
 
+  int checkFileType(String path) {
+    final pathPtr = path.toNativeUtf8();
+
+    try {
+      return _determineFileTypeFromFile(pathPtr);
+    } finally {
+      calloc.free(pathPtr);
+    }
+  }
 
   /// High-level Protect Mode wrapper
   void protectFile({
